@@ -1,4 +1,8 @@
 package client.networking;
 
-public interface Client {
+import shared.datatransfer.User;
+import shared.util.PropertyChangeSubject;
+
+public interface Client extends PropertyChangeSubject {
+    void login(User user);
 }

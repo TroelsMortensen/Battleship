@@ -1,4 +1,7 @@
 package client.model;
 
-public interface Model {
+import shared.util.PropertyChangeSubject;
+
+public interface Model extends PropertyChangeSubject {
+    void login(String username, String password);
 }

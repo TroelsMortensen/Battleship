@@ -11,9 +11,11 @@ import java.io.IOException;
 public class ViewHandler {
 
     private Stage mainStage;
+    private ViewModelFactory vmf;
 
-    public ViewHandler() {
+    public ViewHandler(ViewModelFactory vmf) {
         mainStage = new Stage();
+        this.vmf = vmf;
     }
 
     public void start() {
@@ -27,7 +29,7 @@ public class ViewHandler {
         try {
             Parent root = loader.load();
             LoginController ctrl = loader.getController();
-            ctrl.init();
+            ctrl.init(vmf.getLoginVM());
             mainStage.setTitle("Log in");
             Scene loginScene = new Scene(root);
             mainStage.setScene(loginScene);
