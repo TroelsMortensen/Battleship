@@ -1,7 +1,5 @@
 package client.view.login;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -32,9 +30,9 @@ public class LoginController {
         buttonBox.setAlignment(Pos.BOTTOM_RIGHT);
         usernameTextField.textProperty().bindBidirectional(loginVM.usernameProperty());
         passwordTextField.textProperty().bindBidirectional(loginVM.passwordProperty());
-        loginResultLabel.textProperty().bindBidirectional(loginVM.loginReponseProperty());
+        loginResultLabel.textProperty().bindBidirectional(loginVM.loginResponseProperty());
         loginButton.disableProperty().bind(loginVM.loginButtonDisabledProperty());
-        loginVM.loginReponseProperty().addListener((observableValue, s, t1) -> onLoginResult(t1));
+        loginVM.loginResponseProperty().addListener((observableValue, s, t1) -> onLoginResult(t1));
     }
 
     private void onLoginResult(String t1) {
