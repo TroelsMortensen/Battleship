@@ -36,7 +36,6 @@ public class ModelManager implements Model {
     public void login(String username, String password) {
         loggedInUser = new User(username, password);
         client.login(loggedInUser);
-
     }
 
     @Override

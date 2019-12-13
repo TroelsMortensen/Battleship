@@ -35,7 +35,7 @@
                   <HBox fx:id="buttonBox" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
                         <Button mnemonicParsing="false" onAction="#onRegisterButton" text="Register" />
-                        <Button mnemonicParsing="false" onAction="#onLoginButton" text="Log in" />
+                        <Button mnemonicParsing="false" fx:id="loginButton" onAction="#onLoginButton" text="Log in" />
                      </children>
                   </HBox>
                </children>

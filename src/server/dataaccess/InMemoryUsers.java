@@ -17,21 +17,18 @@ public class InMemoryUsers implements UserHome {
 
     @Override
     public String validateUser(User user) {
-        String result = "";
-        boolean userFound = false;
+        User u = findUser(user);
+        if(u == null) return "User not found";
+        if(!u.getPassword().equals(user.getPassword())) return "Incorrect password";
+        return "OK";
+    }
+
+    private User findUser(User user) {
         for (User u : users) {
             if(u.getUsername().equals(user.getUsername())) {
-                if(u.getPassword().equals(user.getPassword())) {
-                    result = "OK";
-                } else {
-                    result = "Incorrect password";
-                }
-                userFound = true;
+                return u;
             }
         }
-        if(!userFound){
-            result = "User not found";
-        }
-        return result;
+        return null;
     }
 }

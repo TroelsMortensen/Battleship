@@ -5,12 +5,15 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 public class LoginController {
 
+    @FXML
+    private Button loginButton;
     @FXML
     private Label loginResultLabel;
     @FXML
@@ -20,6 +23,8 @@ public class LoginController {
     @FXML
     private HBox buttonBox;
 
+
+
     private LoginVM loginVM;
 
     public void init(LoginVM loginVM) {
@@ -28,7 +33,7 @@ public class LoginController {
         usernameTextField.textProperty().bindBidirectional(loginVM.usernameProperty());
         passwordTextField.textProperty().bindBidirectional(loginVM.passwordProperty());
         loginResultLabel.textProperty().bindBidirectional(loginVM.loginReponseProperty());
-
+        loginButton.disableProperty().bind(loginVM.loginButtonDisabledProperty());
         loginVM.loginReponseProperty().addListener((observableValue, s, t1) -> onLoginResult(t1));
     }
 
