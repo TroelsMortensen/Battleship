@@ -43,19 +43,19 @@ public class LoginVM {
         });
     }
 
-    public StringProperty usernameProperty() {
+    StringProperty usernameProperty() {
         return username;
     }
 
-    public StringProperty passwordProperty() {
+    StringProperty passwordProperty() {
         return password;
     }
 
-    public StringProperty loginResponseProperty() {
+    StringProperty loginResponseProperty() {
         return loginResponse;
     }
 
-    public BooleanProperty loginButtonDisabledProperty() {
+    BooleanProperty loginButtonDisabledProperty() {
         return loginButtonDisabled;
     }
 
