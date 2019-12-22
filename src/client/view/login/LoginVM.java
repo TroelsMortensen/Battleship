@@ -1,6 +1,6 @@
 package client.view.login;
 
-import client.model.Model;
+import client.model.UserModel;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -14,15 +14,15 @@ public class LoginVM {
 
     private StringProperty username, password, loginResponse;
     private BooleanProperty loginButtonDisabled;
-    private Model model;
+    private UserModel userModel;
 
-    public LoginVM(Model model) {
-        this.model = model;
+    public LoginVM(UserModel userModel) {
+        this.userModel = userModel;
         username = new SimpleStringProperty();
         password = new SimpleStringProperty();
         loginResponse = new SimpleStringProperty();
         loginButtonDisabled = new SimpleBooleanProperty(true);
-        model.addPropertyChangeListener(EventType.LOGIN_RESULT.toString(), this::onLoginResponse);
+        userModel.addPropertyChangeListener(EventType.LOGIN_RESULT.toString(), this::onLoginResponse);
 
         username.addListener((observableValue, oldValue, newValue) -> onUserNameChange());
         password.addListener((observableValue, oldValue, newValue) -> onUserNameChange());
@@ -60,6 +60,12 @@ public class LoginVM {
     }
 
     public void login() {
-        model.login(username.get(), password.get());
+        userModel.login(username.get(), password.get());
+    }
+
+    public void clear() {
+        username.set("");
+        password.set("");
+        loginResponse.set("");
     }
 }

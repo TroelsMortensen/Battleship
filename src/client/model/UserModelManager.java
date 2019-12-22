@@ -8,22 +8,24 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class ModelManager implements Model {
+public class UserModelManager implements UserModel {
 
     private Client client;
     private User loggedInUser;
     private PropertyChangeSupport support;
 
-    public ModelManager(Client client) {
+    public UserModelManager(Client client) {
         this.client = client;
         support = new PropertyChangeSupport(this);
         client.addPropertyChangeListener(EventType.LOGIN_RESULT.toString(), this::onLoginResult);
+
+        client.addPropertyChangeListener(EventType.REGISTER_RESULT.toString(), evt -> {
+            support.firePropertyChange(evt);
+        });
     }
 
     private void onLoginResult(PropertyChangeEvent evt) {
         String loginResult = (String) evt.getNewValue();
-
-        System.out.println("Result received in model: " + loginResult);
 
         if (!"OK".equals(loginResult)) {
             loggedInUser = null;
@@ -36,6 +38,12 @@ public class ModelManager implements Model {
     public void login(String username, String password) {
         loggedInUser = new User(username, password);
         client.login(loggedInUser);
+    }
+
+    @Override
+    public void registerUser(String username, String password) {
+        User userToCreate = new User(username, password);
+        client.registerUser(userToCreate);
     }
 
     @Override

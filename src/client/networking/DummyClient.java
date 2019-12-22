@@ -41,6 +41,11 @@ public class DummyClient implements Client {
     }
 
     @Override
+    public void registerUser(User userToCreate) {
+
+    }
+
+    @Override
     public void addPropertyChangeListener(String name, PropertyChangeListener listener) {
         if(null == name) {
             addPropertyChangeListener(listener);

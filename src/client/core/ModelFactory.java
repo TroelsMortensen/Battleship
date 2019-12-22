@@ -1,22 +1,22 @@
 package client.core;
 
-import client.model.Model;
-import client.model.ModelManager;
+import client.model.UserModel;
+import client.model.UserModelManager;
 
 public class ModelFactory {
 
-    private Model model;
+    private UserModel userModel;
     private ClientFactory cf;
 
     public ModelFactory(ClientFactory cf) {
         this.cf = cf;
     }
 
-    public Model getModel() {
-        if(model == null) {
-            model = new ModelManager(cf.getClient());
+    public UserModel getUserModel() {
+        if(userModel == null) {
+            userModel = new UserModelManager(cf.getClient());
         }
-        return model;
+        return userModel;
     }
 
 }

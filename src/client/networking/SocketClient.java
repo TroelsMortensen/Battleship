@@ -25,7 +25,9 @@ public class SocketClient implements Client{
     public void start() {
         try {
             socket = new Socket("localhost", 2910);
-            new Thread(this::listenToServer).start();
+            Thread thread = new Thread(this::listenToServer);
+            thread.setDaemon(true);
+            thread.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -50,10 +52,20 @@ public class SocketClient implements Client{
     @Override
     public void login(User user) {
         Request req = new Request(EventType.LOGIN_REQUEST, user);
+        sendToServer(req, EventType.LOGIN_RESULT);
+    }
+
+    @Override
+    public void registerUser(User userToCreate) {
+        Request req = new Request(EventType.REGISTER_REQUEST, userToCreate);
+        sendToServer(req, EventType.REGISTER_RESULT);
+    }
+
+    private void sendToServer(Request req, EventType registerResult) {
         try {
             outToServer.writeObject(req);
         } catch (IOException e) {
-            support.firePropertyChange(EventType.LOGIN_RESULT.toString(), null, "Connection lost, restart program");
+            support.firePropertyChange(registerResult.toString(), null, "Connection lost, restart program");
         }
     }
 

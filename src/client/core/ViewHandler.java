@@ -1,6 +1,7 @@
 package client.core;
 
 import client.view.login.LoginController;
+import client.view.register.RegisterController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -29,8 +30,23 @@ public class ViewHandler {
         try {
             Parent root = loader.load();
             LoginController ctrl = loader.getController();
-            ctrl.init(vmf.getLoginVM());
+            ctrl.init(vmf.getLoginVM(), this);
             mainStage.setTitle("Log in");
+            Scene loginScene = new Scene(root);
+            mainStage.setScene(loginScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void openRegisterView() {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("../view/register/Register.fxml"));
+        try {
+            Parent root = loader.load();
+            RegisterController ctrl = loader.getController();
+            ctrl.init(vmf.getRegisterVM(), this);
+            mainStage.setTitle("Register");
             Scene loginScene = new Scene(root);
             mainStage.setScene(loginScene);
         } catch (IOException e) {
